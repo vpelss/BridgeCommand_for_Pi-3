@@ -337,6 +337,15 @@ void RadarCalculation::scan(const Terrain& terrain, const OwnShip& ownShip, cons
 
                                 irr::f32 radarEchoStrength = radarFactorVessel * std::pow(M_IN_NM/localRange,4) * it->rcs;
                                 scanArray[currentScanAngle][currentStep] += radarEchoStrength;
+
+                                //Check strength vs noise
+                                if (radarEchoStrength*2 > radarNoise(radarNoiseLevel,radarSeaClutter,radarRainClutter,weather,localRange,currentScanAngle,0,scanSlope,0)) { //FIXME: Needs rain intensity and wind direction
+                                    // Contact not detectable
+                                    std::cout << "Detectable contact at range " << localRange << std::endl;
+                                } else {
+                                    // Contact not detectable
+                                    std::cout << "Non-detectable contact at range " << localRange << std::endl;
+                                }
                                 /*
                                 ;check how visible against noise/clutter. If visible, record as detected for ARPA tracking
                                 If radarEchoStrength#*2 > radarNoiseValueNoBlock(radarNoiseLevel#, radarSeaClutter#, radarRainClutter#, weather#, AllRadarTargets(i)\range, rainIntensity)

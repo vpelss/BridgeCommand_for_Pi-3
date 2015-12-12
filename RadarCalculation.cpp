@@ -60,6 +60,8 @@ RadarCalculation::RadarCalculation()
     }
 
     currentScanAngle=0;
+
+    arpaMaxContact=0; //The highest ARPA contact recorded so far
 }
 
 RadarCalculation::~RadarCalculation()
@@ -341,9 +343,11 @@ void RadarCalculation::scan(const Terrain& terrain, const OwnShip& ownShip, cons
                                 //Check strength vs noise
                                 if (radarEchoStrength*2 > radarNoise(radarNoiseLevel,radarSeaClutter,radarRainClutter,weather,localRange,currentScanAngle,0,scanSlope,0)) { //FIXME: Needs rain intensity and wind direction
                                     // Contact not detectable
+                                    it->arpaDetectable = true;
                                     std::cout << "Detectable contact at range " << localRange << std::endl;
                                 } else {
                                     // Contact not detectable
+                                    it->arpaDetectable = false;
                                     std::cout << "Non-detectable contact at range " << localRange << std::endl;
                                 }
                                 /*

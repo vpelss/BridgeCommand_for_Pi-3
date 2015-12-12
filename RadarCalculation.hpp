@@ -75,6 +75,8 @@ class RadarCalculation
         //colours
         irr::video::SColor radarBackgroundColour;
         irr::video::SColor radarForegroundColour;
+        //ARPA
+        irr::u32 arpaMaxContact;
 
         std::vector<irr::f32> radarRangeNm;
         void scan(const Terrain& terrain, const OwnShip& ownShip, const Buoys& buoys, const OtherShips& otherShips, irr::f32 weather, irr::f32 tideHeight, irr::f32 deltaTime);

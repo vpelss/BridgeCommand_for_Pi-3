@@ -43,6 +43,11 @@ struct RadarData {
     bool SART; //SART enabled?
     //irr::f32 radarHorizon; //Only used for tracking contacts outside current radar visibility range
 
+    //ARPA:
+    irr::u32 arpaContact;
+    bool arpaTracked;
+    bool arpaDetectable;
+
     //Default constructor - initialise to zero
     RadarData():
         height(0),
@@ -61,7 +66,11 @@ struct RadarData {
         hidden(false),
         racon(""),
         raconOffsetTime(0),
-        SART(false)
+        SART(false),
+        //Note: These arpa things should be in another structure, as RadarData is used as a 'once per loop' transfer of data from a contact to the scan, and isn't retained between scans.
+        arpaContact(0),
+        arpaTracked(true),
+        arpaDetectable(false)
         {}
 
 };

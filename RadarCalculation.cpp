@@ -15,6 +15,7 @@
      51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
 
 #include "RadarCalculation.hpp"
+#include "RadarArpaData.hpp"
 
 #include "Terrain.hpp"
 #include "OwnShip.hpp"

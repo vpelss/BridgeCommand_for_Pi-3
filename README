@@ -1,4 +1,12 @@
-This is a fork from 
+This is a fork from https://github.com/bridgecommand/bc
+
+The modifications in this fork, are to allow you to run and compile bridgecommand on the Raspberry Pi 3.
+
+
+
+------------------------------------------------------
+
+Original README
 
 Bridge Command
 ==============

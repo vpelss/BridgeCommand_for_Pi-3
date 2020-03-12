@@ -13,8 +13,10 @@ Differences:
 The Pi 3 and Raspbian have the ability to use GL drivers. The Pi 3 only has 1 GB of RAM, which limits the possible size of textures, etc.
 
 Things I like to set up on Raspbian first:
--A large swap file. Mine is 2 GB.
--If using a USB device to boot from:
+-A large swap file. Mine is 2 GB. https://www.bitpi.co/2015/02/11/how-to-change-raspberry-pis-swapfile-size-on-rasbian/#:~:text=The%20Raspbian%20distribution%20comes%20with,available%20RAM%20on%20the%20machine.
+-If using a USB device to boot from: "dtoverlay=sdtweak,poll_once" in config.txt. See: https://github.com/raspberrypi/linux/issues/2567
+-logs to ram, not SD card, or turn logs off: https://raspberrypi.stackexchange.com/questions/62533/how-can-i-reduce-the-writing-to-log-files
+
 
 Things you must set up:
 high quality sd card or ssd drive, etc

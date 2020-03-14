@@ -1,9 +1,4 @@
-Current info at:
-https://www.emogic.com/notes/bridgecommand_compile_raspberry_pi_3
-until this readme is updated...
----------------------
 This is a fork from https://github.com/bridgecommand/bc
-
 The modifications in this fork, are intended to allow you to run and compile bridgecommand on the Raspberry Pi 3.
 
 Differences:

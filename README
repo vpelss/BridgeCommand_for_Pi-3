@@ -7,8 +7,9 @@ This is a fork from https://github.com/bridgecommand/bc
 The modifications in this fork, are intended to allow you to run and compile bridgecommand on the Raspberry Pi 3.
 
 Differences:
--Binaries (when done) will be ready for the Pi 3 Raspbian
--Height maps in the World folder are 257x257, to prevent invisible land masses due to graphic driver limitations
+- Binaries (when done) will be ready for the Pi 3 Raspbian
+- Height maps in the World folder are 257x257, to prevent invisible land masses due to graphic driver limitations
+- ini file settings are set to lower perfomance so bridgecommand will work on the Pi 3
 
 The Pi 3 and Raspbian have the ability to use GL drivers. The Pi 3 only has 1 GB of RAM, which limits the possible size of textures, etc.
 
@@ -32,9 +33,18 @@ Things you must set up:
   Then adding: PA_ALSA_PLUGHW=1
   to the last line then saving. Then reboot.
 
-
-
 Running tips:
+- Run bridgecommand-ini first
+  - set 'water_segments'. Set it to 8 or lower. The processing power required for the wave motion is just too much for the Raspberry Pi. To fix this I changed the setting in MovingWater.cpp. I changed 'segments = 32' to 'segments=8'. This is on line 86. Mr. Packer wrote this setting into his code. I haven't had a crash or a freeze on the Pi since this setting was available and set appropriately.
+  - Turn off Shading
+  - set width and height to: 800x600 or less 640x480 and start in windowed mode. It will not work well at higher resolutions.
+  - set 'use_directx' to 0
+- Run bridgecommand-bc alone. It often freezes the gui when the browser or other memory intense programs are open.
+- Boot off a fast SD card, not a USB stick unless it is very fast. I use an external, low power, 60 GB SSD and it is very fast.
+- Use IP addresses, not the pc network name, on the Pi for repeater and network settings.
+  
+
+
 
 Compiling with Raspbian:
 
@@ -118,20 +128,12 @@ Compiling without sound:
 Start from a clean build: "make clean". 
 In a terminal at <BridgeCommandSourceLocation> type ‘make’
 
-Run bridgecommand-ini
-1. In bridgecommand-ini set 'water_segments'. Set it to 8 or lower. The processing power required for the wave motion is just too much for the Raspberry Pi. To fix this I changed the setting in MovingWater.cpp. I changed 'segments = 32' to 'segments=8'. This is on line 86. Mr. Packer wrote this setting into his code. I haven't had a crash or a freeze on the Pi since this setting was available and set appropriately.
-2. In bridgecommand-ini Turn off Shading
-3. In bridgecommand-ini set width and height to: 800x600 or less 640x480 and start in windowed mode. It will not work well at higher resolutions.
-3. In bridgecommand-ini set 'use_directx' to 0
-On the PI, some of the land will be invisible. It is likely due to the video hardware limitations.
-To fix this simply reduce the size of all images in the bc-master/World folder to 257x257 and make sure you update the terrain.ini variable TerrainHeightMapSize(1)=257 to match.
+  On the PI, some of the land will be invisible. It is likely due to the video hardware limitations.
+  To fix this simply reduce the size of all images in the bc-master/World folder to 257x257 and make sure you update the terrain.ini variable TerrainHeightMapSize(1)=257 to match.
+
 
 Notes for PI:
 -all images in <BridgeCommandSourceLocation>/World need to be resized to 257x257 and the terrain.ini fille changed to suit.  If you don't, some land masses show white as there is not enough graphic memory for the textures. 
--Run bridgecommand-bc alone. It often freezes the gui when the browser or other memory intense programs are open.
-
--Boot off a SD card, not a USB stick unless it is fast. I use an external, low power, 60 GB SSD and it is fast.
--Use IP addresses not the pc network name on the Pi for repeater and network settings.
 
 Additional tools: https://github.com/vpelss/BridgeCommand_NEMA_UDP_to_File_HTML
 

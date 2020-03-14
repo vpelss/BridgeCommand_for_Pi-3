@@ -91,7 +91,7 @@ copy libportaudio.a only from /usr/local/lib to /home/pi/Desktop/bc-master/libs/
 
 Jump down to 'Compiling with sound:'
 
-3. (works) : Instead of downloading and compiling the libsndfile.a and libportaudio.a, I copy them from the apt installs we did earlier. 
+3. Instead of downloading and compiling the libsndfile.a and libportaudio.a, I copy them from the apt installs we did earlier. 
 sudo apt install libsndfile1 libportaudio2 libportaudiocpp0  libsndfile1-dev portaudio19-d libsndfile.a and libportaudio.aev libasound2-dev 
 The  libsndfile.a and libportaudio.a files are in ‘ /usr/lib/arm-linux-gnueabihf/’ and you can copy them to <BridgeCommandSourceLocation>/libs/libsndfile/ and <BridgeCommandSourceLocation>/libs/portaudio/lib/
 Now remove those two sound libraries so that the shared libraries are not the ones linked to.
@@ -103,21 +103,6 @@ Add the following to the USERLDFLAGS in MakefileWithSound
 -lvorbis
 -lvorbisenc
 
-
-Other OS: 
-
-------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
 Compiling with sound:
 Start from a clean build: "make -f MakefileWithSound clean". 
 In a terminal at <BridgeCommandSourceLocation> type ‘make -f MakefileWithSound’
@@ -126,18 +111,7 @@ Compiling without sound:
 Start from a clean build: "make clean". 
 In a terminal at <BridgeCommandSourceLocation> type ‘make’
 
-  On the PI, some of the land will be invisible. It is likely due to the video hardware limitations.
-  To fix this simply reduce the size of all images in the bc-master/World folder to 257x257 and make sure you update the terrain.ini variable TerrainHeightMapSize(1)=257 to match.
-
-
-Notes for PI:
--all images in <BridgeCommandSourceLocation>/World need to be resized to 257x257 and the terrain.ini fille changed to suit.  If you don't, some land masses show white as there is not enough graphic memory for the textures. 
-
-Additional tools: https://github.com/vpelss/BridgeCommand_NEMA_UDP_to_File_HTML
-
-------------------------
-
-Compiling with CMAKE with sound
+Compiling with CMAKE with sound:
 
 sudo apt install portaudio19-dev  libsndfile1-dev libasound2-dev
 
@@ -165,9 +139,8 @@ Sudo apt install cmake
 Then run the following in a terminal at <BridgeCommandSourceLocation>:
 Cmake ./
 Make
----------------------
 
-Compile Bridgecommand for the Raspberry Pi 3 (using Gentoo Linux 64)
+Compile Bridgecommand for the Raspberry Pi 3 (using Gentoo Linux 64 OS):
 
 Gentoo Linux can be downloaded here: https://github.com/sakaki-/gentoo-on-rpi-64bit
 edit bc-master/libs/Irrlicht/irrlicht-svn/source/Irrlicht/libpng/pngpriv.h and change:
@@ -176,14 +149,11 @@ to
 define NO_PNG_FILTER_OPTIMIZATIONS
 then run 'make'
 
--------------------------------
-Random notes:
+------------------------------------------------------
 
-test file  dependencies with:
-ldd bridgecommand-bc
+Additional tools: https://github.com/vpelss/BridgeCommand_NEMA_UDP_to_File_HTML
 
-Direct link:
-can replace -lasound with /usr/lib/arm-linux-gnueabihf/libasound.so.2
+-------------
 
 Note: These libraries are installed by default on Raspbian
 libsndfile1-1.0.28-6
@@ -195,5 +165,5 @@ sudo apt install libsndfile1 libportaudio2 libasound2-dev libasound2-data
 
 .so share
 .a archive
-notes: dev lib are required to link against .so files plus provide headers
+note: dev lib are required to link against .so files plus provide headers
 

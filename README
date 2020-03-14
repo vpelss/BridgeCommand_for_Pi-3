@@ -43,10 +43,9 @@ Running tips:
 - Boot off a fast SD card, not a USB stick unless it is very fast. I use an external, low power, 60 GB SSD and it is very fast.
 - Use IP addresses, not the pc network name, on the Pi for repeater and network settings.
   
+<u>Compiling with Raspbian:</u>
 
 
-
-Compiling with Raspbian:
 
 Other OS: 
 

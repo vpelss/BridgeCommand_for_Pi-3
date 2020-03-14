@@ -43,42 +43,26 @@ Running tips:
 - Boot off a fast SD card, not a USB stick unless it is very fast. I use an external, low power, 60 GB SSD and it is very fast.
 - Use IP addresses, not the pc network name, on the Pi for repeater and network settings.
   
-<u>Compiling with Raspbian:</u>
+Compiling with Raspbian:
 
+- Download source code from:
+  https://github.com/bridgecommand/bc
+  Extract to your desktop. This will be reffered to as <BridgeCommandSourceLocation> below.
 
+- Install required libraries:
+  sudo apt-get install mesa-common-dev libxxf86vm-dev freeglut3-dev libxext-dev libxcursor-dev
+  (if sound is required)
+  sudo apt install libsndfile1 libportaudio2 libportaudiocpp0  libsndfile1-dev portaudio19-dev libasound2-dev 
 
-Other OS: 
-
-------------------------------------------------------
-From Emogic....
-
-Compiling Bridgecommand-bc on the Raspberry Pi 3 using Raspbian OS
-
-
-
-Install required libraries:
-sudo apt-get install mesa-common-dev libxxf86vm-dev freeglut3-dev libxext-dev libxcursor-dev
-(if sound is required)
-sudo apt install libsndfile1 libportaudio2 libportaudiocpp0  libsndfile1-dev portaudio19-dev libasound2-dev 
-
-
-
-Download source code from:
-https://www.bridgecommand.co.uk/
-https://github.com/bridgecommand/bc
-Extract to your desktop.
-
-Instructions to compile the sound library files are in CompilingLinuxAndMac.txt, but I cannot get them to work with the Raspbian OS. 
+Instructions to compile the sound library files are in CompilingLinuxAndMac.txt, they do not work with the Raspbian OS. 
 The following are ways I have built Bridgecommand with sound in Raspbian.
 If you don't need sound, jump down to 'Compiling without sound:'
 
-
-
-1. (Works:) The easiest way is to add sound is to compile Bridgecommand using pre-installed system SHARED libraries we installed earlier.
+1. The easiest way is to add sound is to compile Bridgecommand using pre-installed system SHARED libraries we installed earlier.
 sudo apt install libsndfile1 libportaudio2 libportaudiocp0  libsndfile1-dev portaudio19-dev libasound2-dev 
 Jump down to 'Compiling with sound:'
 
-2. (Works) If you need to have a version with STATIC sound libraries built in to the image, do the following.
+2. If you need to have a version with STATIC sound libraries built in to the image, do the following.
 Make sure there are no installed sound libraries already.
 sudo apt remove libsndfile1 libportaudio2 libportaudiocpp0  libsndfile1-dev portaudio19-dev 
 (you may want to install afterwards as other programs may use these libraries)
@@ -99,7 +83,7 @@ sudo make
 Then find and copy libsndfile.a over to /home/pi/Desktop/bc-master/libs/libsndfile/lib
 
 Get source from:
-https://app.assembla.com/spaces/portaudio/git/source  (clone)
+https://app.assembla.com/spaces/portaudio/git/source  (see clone)
 cmake ./
 sudo make
 sudo make install
@@ -118,6 +102,21 @@ Add the following to the USERLDFLAGS in MakefileWithSound
 -ljack
 -lvorbis
 -lvorbisenc
+
+
+Other OS: 
+
+------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 Compiling with sound:
 Start from a clean build: "make -f MakefileWithSound clean". 

@@ -8,7 +8,7 @@ The modifications in this fork, are intended to allow you to run and compile bri
 
 Differences:
 -Binaries (when done) will be ready for the Pi 3 Raspbian
--Height maps in the World folder are 257x257, to prevent invisible land masses 
+-Height maps in the World folder are 257x257, to prevent invisible land masses due to graphic driver limitations
 
 The Pi 3 and Raspbian have the ability to use GL drivers. The Pi 3 only has 1 GB of RAM, which limits the possible size of textures, etc.
 
@@ -17,9 +17,22 @@ Things I like to set up on Raspbian first:
 -If using a USB device to boot from: "dtoverlay=sdtweak,poll_once" in config.txt. See: https://github.com/raspberrypi/linux/issues/2567
 -logs to ram, not SD card, or turn logs off: https://raspberrypi.stackexchange.com/questions/62533/how-can-i-reduce-the-writing-to-log-files
 
-
 Things you must set up:
-high quality sd card or ssd drive, etc
+-Use a high quality sd card or ssd drive. Perfomance is drastically affected by storage media. https://www.raspberrypi.org/documentation/installation/sd-cards.md
+-Ensure Raspbian is up to date:
+  sudo apt-get update
+  sudo apt-get dist-upgrade
+-Enable opengl in Raspbian:
+  Run: raspi-config
+  choose '7 - advanced' then 'A7 GL Driver' then 'G2 - GL Fake KMS'
+  Reboot
+-For sound, we must type this in a terminal: 
+  export PA_ALSA_PLUGHW=1 (or we get the following error: Pa_OpenDefaultStream failed. Segmentation fault)
+  You can set it permanently by: sudo nano /etc/enviornment
+  Then adding: PA_ALSA_PLUGHW=1
+  to the last line then saving. Then reboot.
+
+
 
 Running tips:
 
@@ -32,19 +45,14 @@ From Emogic....
 
 Compiling Bridgecommand-bc on the Raspberry Pi 3 using Raspbian OS
 
-Ensure Raspbian is up to date:
-sudo apt-get update
-sudo apt-get dist-upgrade
+
 
 Install required libraries:
 sudo apt-get install mesa-common-dev libxxf86vm-dev freeglut3-dev libxext-dev libxcursor-dev
 (if sound is required)
 sudo apt install libsndfile1 libportaudio2 libportaudiocpp0  libsndfile1-dev portaudio19-dev libasound2-dev 
 
-Enable opengl in Raspbian:
-Run: raspi-config
-choose '7 - advanced' then 'A7 GL Driver' then 'G2 - GL Fake KMS'
-Reboot
+
 
 Download source code from:
 https://www.bridgecommand.co.uk/
@@ -55,14 +63,7 @@ Instructions to compile the sound library files are in CompilingLinuxAndMac.txt,
 The following are ways I have built Bridgecommand with sound in Raspbian.
 If you don't need sound, jump down to 'Compiling without sound:'
 
-For sound, we must type this in a terminal:: 
-export PA_ALSA_PLUGHW=1
-or we get the following error: Pa_OpenDefaultStream failed. Segmentation fault
-You can set it permanently by:
-sudo nano /etc/enviornment
-Then adding:
-PA_ALSA_PLUGHW=1
-To the last line then saving. Then reboot.
+
 
 1. (Works:) The easiest way is to add sound is to compile Bridgecommand using pre-installed system SHARED libraries we installed earlier.
 sudo apt install libsndfile1 libportaudio2 libportaudiocp0  libsndfile1-dev portaudio19-dev libasound2-dev 
@@ -129,12 +130,10 @@ Notes for PI:
 -all images in <BridgeCommandSourceLocation>/World need to be resized to 257x257 and the terrain.ini fille changed to suit.  If you don't, some land masses show white as there is not enough graphic memory for the textures. 
 -Run bridgecommand-bc alone. It often freezes the gui when the browser or other memory intense programs are open.
 
--Boot off a SD card, not a USB stick unless it is fast. I use an external 60 GB SSD and it is fast.
+-Boot off a SD card, not a USB stick unless it is fast. I use an external, low power, 60 GB SSD and it is fast.
 -Use IP addresses not the pc network name on the Pi for repeater and network settings.
 
 Additional tools: https://github.com/vpelss/BridgeCommand_NEMA_UDP_to_File_HTML
-
-I hope to fork BridgeCommand and keep a compiled Pi 3 version available in the near future.
 
 ------------------------
 

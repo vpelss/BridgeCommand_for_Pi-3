@@ -37,7 +37,9 @@ Running tips:
 - Run bridgecommand-bc alone. It often freezes the gui when the browser or other memory intense programs are open.
 - Boot off a fast SD card, not a USB stick unless it is very fast. I use an external, low power, 60 GB SSD and it is very fast.
 - Use IP addresses, not the pc network name, on the Pi for repeater and network settings.
-  
+
+--------------
+
 Compiling with Raspbian:
 
 - Download source code from:
@@ -106,6 +108,8 @@ Compiling without sound:
 Start from a clean build: "make clean". 
 In a terminal at <BridgeCommandSourceLocation> type ‘make’
 
+-------------------
+
 Compiling with CMAKE with sound:
 
 sudo apt install portaudio19-dev  libsndfile1-dev libasound2-dev
@@ -134,6 +138,8 @@ Sudo apt install cmake
 Then run the following in a terminal at <BridgeCommandSourceLocation>:
 Cmake ./
 Make
+
+---------------
 
 Compile Bridgecommand for the Raspberry Pi 3 (using Gentoo Linux 64 OS):
 

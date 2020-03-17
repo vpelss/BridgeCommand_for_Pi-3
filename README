@@ -3,7 +3,7 @@ The modifications in this fork are intended to allow you to run and compile brid
 
 Differences:
 - Binaries (when done) will be ready for the Pi 3 Raspbian
-- Height maps in the World folder are 257x257, to prevent invisible land masses due to graphic driver limitations
+- Height maps in the World folder are 256x256, to prevent invisible land masses due to graphic driver limitations
 - ini file settings are set to lower perfomance so bridgecommand will work on the Pi 3
 
 The Pi 3 and Raspbian have the ability to use GL drivers. The Pi 3 only has 1 GB of RAM, which limits the possible size of textures, etc.
